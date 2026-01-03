@@ -4,7 +4,9 @@ import App from './App';
 describe('App', () => {
   it('renders hero headline', () => {
     render(<App />);
-    expect(screen.getByRole('heading', { level: 1, name: /admin dashboard starter/i })).toBeVisible();
+    expect(
+      screen.getByRole('heading', { level: 1, name: /admin dashboard starter/i })
+    ).toBeVisible();
   });
 
   it('increments the counter', async () => {

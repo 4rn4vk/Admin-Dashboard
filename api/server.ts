@@ -8,7 +8,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (_req, res) => {
-  res.json({ message: 'Mock API running. Try /api/health, /api/dashboard, /api/assessments, /api/users.' });
+  res.json({
+    message: 'Mock API running. Try /api/health, /api/dashboard, /api/assessments, /api/users.'
+  });
 });
 
 // Mock data
@@ -21,9 +23,24 @@ const dashboard = {
 };
 
 const assessments = [
-  { id: 'asm-001', name: 'Quarterly Risk Review', status: 'in-progress', owner: 'Alex' },
-  { id: 'asm-002', name: 'Vendor Security Check', status: 'blocked', owner: 'Priya' },
-  { id: 'asm-003', name: 'Application Pen Test', status: 'scheduled', owner: 'Jordan' }
+  {
+    id: 'asm-001',
+    name: 'Quarterly Risk Review',
+    status: 'in-progress',
+    owner: 'Alex'
+  },
+  {
+    id: 'asm-002',
+    name: 'Vendor Security Check',
+    status: 'blocked',
+    owner: 'Priya'
+  },
+  {
+    id: 'asm-003',
+    name: 'Application Pen Test',
+    status: 'scheduled',
+    owner: 'Jordan'
+  }
 ];
 
 const users = [
@@ -49,6 +66,5 @@ app.get('/api/users', (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Mock API listening on http://localhost:${PORT}`);
 });

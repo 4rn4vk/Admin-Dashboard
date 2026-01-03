@@ -6,7 +6,11 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family:
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 .hero {

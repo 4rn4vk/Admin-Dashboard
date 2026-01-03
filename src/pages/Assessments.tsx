@@ -37,7 +37,9 @@ function Assessments() {
                   <p className="font-semibold leading-tight">{item.name}</p>
                   <p className="text-sm text-text-muted">ID: {item.id}</p>
                 </div>
-                <span className={`inline-flex items-center rounded-full text-xs font-semibold px-3 py-1 shadow-sm ${statusStyles[item.status]}`}>
+                <span
+                  className={`inline-flex items-center rounded-full text-xs font-semibold px-3 py-1 shadow-sm ${statusStyles[item.status]}`}
+                >
                   {item.status}
                 </span>
               </div>

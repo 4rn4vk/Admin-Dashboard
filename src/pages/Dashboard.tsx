@@ -27,7 +27,9 @@ function Dashboard() {
             >
               <p className="text-sm text-text-muted">{stat.label}</p>
               <p className="text-3xl font-bold mt-1">{stat.value}</p>
-              <span className={`text-sm font-semibold ${stat.delta.startsWith('-') ? 'text-status-danger' : 'text-status-success'}`}>
+              <span
+                className={`text-sm font-semibold ${stat.delta.startsWith('-') ? 'text-status-danger' : 'text-status-success'}`}
+              >
                 {stat.delta}
               </span>
             </div>
