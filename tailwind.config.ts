@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   theme: {
     extend: {
@@ -31,9 +32,9 @@ module.exports = {
         }
       },
       spacing: {
-        13: '3.25rem',
-        15: '3.75rem',
-        18: '4.5rem'
+        '13': '3.25rem',
+        '15': '3.75rem',
+        '18': '4.5rem'
       },
       borderRadius: {
         lgx: '18px',
@@ -46,3 +47,5 @@ module.exports = {
   },
   plugins: []
 };
+
+export default config;

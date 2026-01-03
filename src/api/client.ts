@@ -15,7 +15,7 @@ async function safeErrorMessage(res: Response): Promise<string | null> {
   try {
     const data = await res.json();
     if (data && typeof data.message === 'string') return data.message;
-  } catch (err) {
+  } catch {
     // ignore parse errors
   }
   return null;
