@@ -64,13 +64,13 @@ function Layout({ navLinks }: LayoutProps) {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-text-muted hover:text-white hover:bg-white/5 transition"
+              className="md:hidden flex flex-col gap-1.5 justify-center rounded-md p-2 text-text-muted hover:text-white hover:bg-white/5 transition"
               onClick={() => setIsNavOpen(true)}
               aria-label="Open navigation"
             >
-              <span className="block w-5 border-t border-current" />
-              <span className="block w-5 border-t border-current mt-1.5" />
-              <span className="block w-5 border-t border-current mt-1.5" />
+              <span className="block w-5 h-0.5 bg-current rounded" />
+              <span className="block w-5 h-0.5 bg-current rounded" />
+              <span className="block w-5 h-0.5 bg-current rounded" />
             </button>
             <div>
               <p className="text-xs text-text-muted uppercase tracking-[0.18em]">
@@ -88,20 +88,6 @@ function Layout({ navLinks }: LayoutProps) {
           </div>
         </main>
       </div>
-
-      {!isNavOpen && (
-        <button
-          type="button"
-          className="md:hidden fixed bottom-4 left-4 z-40 inline-flex items-center gap-2 rounded-full bg-brand-600 text-surface px-4 py-2 shadow-lg shadow-brand-600/40 hover:bg-brand-500 transition"
-          onClick={() => setIsNavOpen(true)}
-          aria-label="Open navigation"
-        >
-          <span className="block w-4 border-t border-current" />
-          <span className="block w-4 border-t border-current" />
-          <span className="block w-4 border-t border-current" />
-          <span className="text-sm font-semibold">Menu</span>
-        </button>
-      )}
     </div>
   );
 }
