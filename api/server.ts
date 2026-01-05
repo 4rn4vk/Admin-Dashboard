@@ -157,7 +157,24 @@ function validateUpdateAssessment(
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors());
+// CORS: allow local dev and deployed frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'https://admin-dashboard-eyduigkxw-nocodermans-projects.vercel.app',
+  'https://admin-dashboard-418krwr8g-nocodermans-projects.vercel.app'
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    }
+  })
+);
 app.use(express.json());
 
 app.get('/', (_req, res) => {
