@@ -1,12 +1,13 @@
 # Fly.io Dockerfile for the API server
-# Uses node:18-alpine; installs all deps (including dev) because the server runs via tsx
-FROM node:18-alpine
+# Uses node:20-alpine to satisfy engine ranges and installs all deps (including dev) because the server runs via tsx
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies (include dev because tsx runs the TS sources directly)
 COPY package.json package-lock.json ./
-RUN npm ci --omit=optional
+# npm ci fails when lock/package are out of sync; npm install is more forgiving for this service container
+RUN npm install --omit=optional --legacy-peer-deps
 
 # Copy source
 COPY . .
