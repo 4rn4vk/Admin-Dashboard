@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import reactLogo from '../assets/react.svg';
 
@@ -11,9 +12,26 @@ interface LayoutProps {
 }
 
 function Layout({ navLinks }: LayoutProps) {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const closeNav = () => setIsNavOpen(false);
+
   return (
-    <div className="min-h-screen bg-surface text-text-primary flex">
-      <aside className="hidden md:flex w-64 flex-col gap-6 bg-[#0f172a] border-r border-white/5 px-4 py-6">
+    <div className="min-h-screen bg-surface text-text-primary flex relative">
+      {isNavOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation"
+          className="fixed inset-0 bg-black/50 md:hidden"
+          onClick={closeNav}
+        />
+      )}
+
+      <aside
+        className={`fixed inset-y-0 left-0 w-64 flex flex-col gap-6 bg-[#0f172a] border-r border-white/5 px-4 py-6 transform transition-transform duration-200 md:static md:translate-x-0 md:flex ${
+          isNavOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
         <div className="flex items-center gap-3">
           <img src={reactLogo} alt="Logo" className="h-10 w-10" />
           <div>
@@ -26,6 +44,7 @@ function Layout({ navLinks }: LayoutProps) {
             <NavLink
               key={link.to}
               to={link.to}
+              onClick={closeNav}
               className={({ isActive }) =>
                 [
                   'px-3 py-2 rounded-lg flex items-center gap-2 font-medium transition',
@@ -42,9 +61,23 @@ function Layout({ navLinks }: LayoutProps) {
 
       <div className="flex-1 flex flex-col">
         <header className="h-14 border-b border-white/5 px-4 md:px-6 flex items-center justify-between bg-[#0f172a]">
-          <div>
-            <p className="text-xs text-text-muted uppercase tracking-[0.18em]">Vite + React + TS</p>
-            <p className="font-semibold">Admin Dashboard Starter</p>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-text-muted hover:text-white hover:bg-white/5 transition"
+              onClick={() => setIsNavOpen(true)}
+              aria-label="Open navigation"
+            >
+              <span className="block w-5 border-t border-current" />
+              <span className="block w-5 border-t border-current mt-1.5" />
+              <span className="block w-5 border-t border-current mt-1.5" />
+            </button>
+            <div>
+              <p className="text-xs text-text-muted uppercase tracking-[0.18em]">
+                Vite + React + TS
+              </p>
+              <p className="font-semibold">Admin Dashboard Starter</p>
+            </div>
           </div>
           <div className="text-sm text-text-muted">Mock API & Query ready</div>
         </header>
