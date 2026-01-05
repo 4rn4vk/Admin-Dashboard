@@ -3,7 +3,6 @@ import globals from 'globals';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 
@@ -33,7 +32,6 @@ const config: Linter.Config[] = [
       }
     },
     plugins: {
-      '@typescript-eslint': tseslint,
       'react-hooks': reactHooks
     },
     settings: {
@@ -42,7 +40,15 @@ const config: Linter.Config[] = [
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      'no-undef': 'off' // TypeScript handles this
+      'no-undef': 'off', // TypeScript handles this
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_'
+        }
+      ]
     }
   }
 ];

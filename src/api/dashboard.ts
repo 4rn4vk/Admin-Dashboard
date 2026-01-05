@@ -1,13 +1,13 @@
 import { apiGet } from './client';
 
 export interface DashboardStat {
-  label: string;
-  value: number;
-  delta: string;
+  readonly label: string;
+  readonly value: number;
+  readonly delta: string;
 }
 
 export interface DashboardResponse {
-  stats: DashboardStat[];
+  readonly stats: ReadonlyArray<DashboardStat>;
 }
 
 export async function fetchDashboard(): Promise<DashboardResponse> {

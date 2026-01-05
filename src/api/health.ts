@@ -1,8 +1,8 @@
 import { apiGet } from './client';
 
 export interface HealthResponse {
-  status: string;
-  timestamp: string;
+  readonly status: string;
+  readonly timestamp: string;
 }
 
 export async function fetchHealth(): Promise<HealthResponse> {

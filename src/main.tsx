@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import Assessments from './pages/Assessments';
 import Users from './pages/Users';
 import { queryClient } from './lib/queryClient';
+import { ToastProvider } from './contexts/ToastContext';
+import { ToastContainer } from './components/ToastContainer';
 import './index.css';
 
 const rootElement = document.getElementById('root');
@@ -31,7 +33,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <ToastProvider>
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </ToastProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
