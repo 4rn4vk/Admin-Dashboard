@@ -22,13 +22,13 @@ function Layout({ navLinks }: LayoutProps) {
         <button
           type="button"
           aria-label="Close navigation"
-          className="fixed inset-0 bg-black/50 md:hidden"
+          className="fixed inset-0 bg-black/50 md:hidden z-30"
           onClick={closeNav}
         />
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 w-64 flex flex-col gap-6 bg-[#0f172a] border-r border-white/5 px-4 py-6 transform transition-transform duration-200 md:static md:translate-x-0 md:flex ${
+        className={`fixed inset-y-0 left-0 w-64 flex flex-col gap-6 bg-[#0f172a] border-r border-white/5 px-4 py-6 transform transition-transform duration-200 md:static md:translate-x-0 md:flex z-40 ${
           isNavOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -88,6 +88,20 @@ function Layout({ navLinks }: LayoutProps) {
           </div>
         </main>
       </div>
+
+      {!isNavOpen && (
+        <button
+          type="button"
+          className="md:hidden fixed bottom-4 left-4 z-40 inline-flex items-center gap-2 rounded-full bg-brand-600 text-surface px-4 py-2 shadow-lg shadow-brand-600/40 hover:bg-brand-500 transition"
+          onClick={() => setIsNavOpen(true)}
+          aria-label="Open navigation"
+        >
+          <span className="block w-4 border-t border-current" />
+          <span className="block w-4 border-t border-current" />
+          <span className="block w-4 border-t border-current" />
+          <span className="text-sm font-semibold">Menu</span>
+        </button>
+      )}
     </div>
   );
 }
