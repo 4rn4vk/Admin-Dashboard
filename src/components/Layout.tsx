@@ -9,9 +9,15 @@ export interface NavItem {
 
 interface LayoutProps {
   navLinks: NavItem[];
+  headerTitle?: string;
+  headerSubtitle?: string;
 }
 
-function Layout({ navLinks }: LayoutProps) {
+function Layout({
+  navLinks,
+  headerTitle = 'Vite + React + TS',
+  headerSubtitle = 'Admin Dashboard Starter'
+}: LayoutProps) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const closeNav = () => setIsNavOpen(false);
@@ -60,11 +66,11 @@ function Layout({ navLinks }: LayoutProps) {
       </aside>
 
       <div className="flex-1 flex flex-col">
-        <header className="h-14 border-b border-white/5 px-4 md:px-6 flex items-center justify-between bg-[#0f172a]">
-          <div className="flex items-center gap-3">
+        <header className="h-16 border-b border-white/5 px-4 md:px-6 flex items-center justify-between bg-[#0f172a]">
+          <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
             <button
               type="button"
-              className="md:hidden flex flex-col gap-1.5 justify-center rounded-md p-2 text-text-muted hover:text-white hover:bg-white/5 transition"
+              className="md:hidden flex flex-col gap-1.5 justify-center rounded-md p-2 text-text-muted hover:text-white hover:bg-white/5 transition flex-shrink-0"
               onClick={() => setIsNavOpen(true)}
               aria-label="Open navigation"
             >
@@ -72,14 +78,14 @@ function Layout({ navLinks }: LayoutProps) {
               <span className="block w-5 h-0.5 bg-current rounded" />
               <span className="block w-5 h-0.5 bg-current rounded" />
             </button>
-            <div>
-              <p className="text-xs text-text-muted uppercase tracking-[0.18em]">
-                Vite + React + TS
-              </p>
-              <p className="font-semibold">Admin Dashboard Starter</p>
+            <div className="min-w-0">
+              <p className="text-xs text-text-muted uppercase tracking-[0.18em]">{headerTitle}</p>
+              <p className="font-semibold truncate">{headerSubtitle}</p>
             </div>
           </div>
-          <div className="text-sm text-text-muted">Mock API & Query ready</div>
+          <div className="text-sm text-text-muted hidden md:block flex-shrink-0">
+            Mock API & Query ready
+          </div>
         </header>
 
         <main className="flex-1 overflow-auto bg-surface px-4 py-6 md:px-8 md:py-8">
