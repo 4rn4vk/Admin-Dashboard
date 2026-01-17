@@ -58,6 +58,12 @@ function ModalWrapper({ title, children }: { title: string; children: React.Reac
  * Basic modal with simple text content
  */
 export const Basic: Story = {
+  args: {
+    isOpen: true,
+    title: 'Basic Modal',
+    children: <p className="text-text-muted">This is a basic modal with some text content.</p>,
+    onClose: () => {}
+  },
   render: () => (
     <ModalWrapper title="Basic Modal">
       <p className="text-text-muted">This is a basic modal with some text content.</p>
@@ -69,6 +75,12 @@ export const Basic: Story = {
  * Modal with a form inside
  */
 export const WithForm: Story = {
+  args: {
+    isOpen: true,
+    title: 'User Registration',
+    children: null,
+    onClose: () => {}
+  },
   render: () => (
     <ModalWrapper title="User Registration">
       <form className="space-y-4">
@@ -117,6 +129,12 @@ export const WithForm: Story = {
  * Modal with long content that scrolls
  */
 export const WithLongContent: Story = {
+  args: {
+    isOpen: true,
+    title: 'Terms and Conditions',
+    children: null,
+    onClose: () => {}
+  },
   render: () => (
     <ModalWrapper title="Terms and Conditions">
       <div className="space-y-4 text-text-muted max-h-96 overflow-y-auto">
@@ -158,6 +176,12 @@ export const WithLongContent: Story = {
  * Confirmation modal
  */
 export const Confirmation: Story = {
+  args: {
+    isOpen: true,
+    title: 'Confirm Deletion',
+    children: null,
+    onClose: () => {}
+  },
   render: () => (
     <ModalWrapper title="Confirm Deletion">
       <div className="space-y-4">

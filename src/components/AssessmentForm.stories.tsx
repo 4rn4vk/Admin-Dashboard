@@ -174,8 +174,7 @@ export const StatusOptions: Story = {
                 status,
                 owner: 'Jane Smith',
                 priority: 'medium',
-                createdAt: '2024-01-01T00:00:00Z',
-                updatedAt: '2024-01-06T00:00:00Z'
+                createdAt: '2024-01-01T00:00:00Z'
               }}
               onSubmit={(data) => console.log('Form submitted:', data)}
               onCancel={() => console.log('Form cancelled')}
@@ -206,8 +205,7 @@ export const PriorityOptions: Story = {
                 status: 'scheduled',
                 owner: 'Alex Johnson',
                 priority,
-                createdAt: '2024-01-01T00:00:00Z',
-                updatedAt: '2024-01-06T00:00:00Z'
+                createdAt: '2024-01-01T00:00:00Z'
               }}
               onSubmit={(data) => console.log('Form submitted:', data)}
               onCancel={() => console.log('Form cancelled')}

@@ -109,6 +109,13 @@ const SettingsPage = () => (
  * Default layout with standard navigation
  */
 export const Default: Story = {
+  args: {
+    navLinks: [
+      { to: '/dashboard', label: 'Dashboard' },
+      { to: '/assessments', label: 'Assessments' },
+      { to: '/users', label: 'Users' }
+    ]
+  },
   render: () => (
     <BrowserRouter>
       <Routes>
@@ -137,6 +144,15 @@ export const Default: Story = {
  * Layout with custom header text
  */
 export const CustomHeader: Story = {
+  args: {
+    navLinks: [
+      { to: '/dashboard', label: 'Dashboard' },
+      { to: '/assessments', label: 'Assessments' },
+      { to: '/users', label: 'Users' }
+    ],
+    headerTitle: 'Enterprise Portal',
+    headerSubtitle: 'Management Console'
+  },
   render: () => (
     <BrowserRouter>
       <Routes>
@@ -167,6 +183,16 @@ export const CustomHeader: Story = {
  * Layout with extended navigation
  */
 export const ExtendedNavigation: Story = {
+  args: {
+    navLinks: [
+      { to: '/dashboard', label: 'Dashboard' },
+      { to: '/assessments', label: 'Assessments' },
+      { to: '/users', label: 'Users' },
+      { to: '/settings', label: 'Settings' },
+      { to: '/reports', label: 'Reports' },
+      { to: '/analytics', label: 'Analytics' }
+    ]
+  },
   render: () => (
     <BrowserRouter>
       <Routes>
@@ -215,6 +241,14 @@ export const ExtendedNavigation: Story = {
  * Layout with minimal navigation
  */
 export const MinimalNavigation: Story = {
+  args: {
+    navLinks: [
+      { to: '/dashboard', label: 'Home' },
+      { to: '/settings', label: 'Settings' }
+    ],
+    headerTitle: 'Simple App',
+    headerSubtitle: 'Dashboard'
+  },
   render: () => (
     <BrowserRouter>
       <Routes>
@@ -247,6 +281,13 @@ export const MobileView: Story = {
     viewport: {
       defaultViewport: 'mobile1'
     }
+  },
+  args: {
+    navLinks: [
+      { to: '/dashboard', label: 'Dashboard' },
+      { to: '/assessments', label: 'Assessments' },
+      { to: '/users', label: 'Users' }
+    ]
   },
   render: () => (
     <BrowserRouter>
