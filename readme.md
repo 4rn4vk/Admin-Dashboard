@@ -16,6 +16,7 @@ A modern, full-stack admin dashboard built with React, TypeScript, and Vite. Fea
 ## 🛠️ Technologies Used
 
 ### Frontend
+
 - **React 18** — UI library
 - **TypeScript** — Type-safe development
 - **Vite** — Fast build tool and dev server
@@ -24,11 +25,13 @@ A modern, full-stack admin dashboard built with React, TypeScript, and Vite. Fea
 - **Tailwind CSS** — Utility-first CSS framework
 
 ### Backend
+
 - **Express.js** — Node.js web framework
 - **CORS** — Cross-origin resource sharing
 - **TypeScript** — Type-safe backend
 
 ### Development Tools
+
 - **Vitest** — Unit testing framework
 - **Testing Library** — React component testing
 - **ESLint** — Code linting (flat config)
@@ -37,6 +40,7 @@ A modern, full-stack admin dashboard built with React, TypeScript, and Vite. Fea
 - **lint-staged** — Pre-commit checks
 
 ### Deployment
+
 - **Docker** — Containerization
 - **Fly.io** — Platform for deployment
 
@@ -48,22 +52,26 @@ A modern, full-stack admin dashboard built with React, TypeScript, and Vite. Fea
 ## ⚙️ Setup & Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd admin-dashboard
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start the development server**
+
    ```bash
    npm run dev
    ```
 
 4. **Start the mock API server** (in a separate terminal)
+
    ```bash
    npm run api
    ```

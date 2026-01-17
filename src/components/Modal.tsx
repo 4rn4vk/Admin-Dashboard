@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -8,6 +8,9 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, title, children }: ModalProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const titleId = useId();
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -18,6 +21,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
+      dialogRef.current?.focus();
     }
 
     return () => {
@@ -35,19 +39,26 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
           onClick={onClose}
-          onKeyDown={(e) => e.key === 'Escape' && onClose()}
-          role="button"
-          tabIndex={0}
-          aria-label="Close modal"
+          aria-hidden="true"
         />
 
         {/* Modal */}
-        <div className="relative bg-panel border border-border rounded-lgx shadow-panel w-full max-w-md p-6 transform transition-all">
+        <div
+          ref={dialogRef}
+          className="relative bg-panel border border-border rounded-lgx shadow-panel w-full max-w-md p-6 transform transition-all"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          tabIndex={-1}
+        >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold text-text-primary">{title}</h3>
+            <h3 id={titleId} className="text-xl font-semibold text-text-primary">
+              {title}
+            </h3>
             <button
               onClick={onClose}
               className="text-text-muted hover:text-text-primary transition-colors"
+              aria-label="Close dialog"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path

@@ -44,11 +44,18 @@ export function ToastContainer() {
   const { toasts, removeToast } = useToast();
 
   return (
-    <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
+    <div
+      className="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"
+      aria-live="polite"
+      aria-atomic="true"
+    >
       {toasts.map((toast) => (
         <div
           key={toast.id}
           className={`pointer-events-auto flex items-start gap-3 p-4 rounded-lg border shadow-lg backdrop-blur-sm animate-slide-in-right ${toastStyles[toast.type]}`}
+          role="status"
+          aria-live="polite"
+          aria-label={`${toast.type} notification`}
         >
           <div className="flex-shrink-0 mt-0.5">{toastIcons[toast.type]}</div>
           <p className="flex-1 text-sm font-medium leading-relaxed">{toast.message}</p>
