@@ -18,6 +18,13 @@ export default defineConfig({
     baseURL: 'http://localhost:5173',
     headless: true
   },
+  // Start a dev server automatically when running tests locally (useful for CI too)
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:5173',
+    reuseExistingServer: true,
+    timeout: 120 * 1000
+  },
   projects: [
     {
       name: 'chromium',

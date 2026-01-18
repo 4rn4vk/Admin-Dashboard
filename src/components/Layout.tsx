@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import reactLogo from '../assets/react.svg';
 
@@ -19,11 +19,28 @@ function Layout({
   headerSubtitle = 'Admin Dashboard Starter'
 }: LayoutProps) {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'dark';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
 
   const closeNav = () => setIsNavOpen(false);
 
   return (
-    <div className="min-h-screen bg-surface text-text-primary flex relative">
+    <div
+      className={`min-h-screen flex relative transition-colors duration-300 ${
+        theme === 'dark' ? 'bg-surface text-text-primary' : 'bg-white text-black'
+      }`}
+    >
       {isNavOpen && (
         <button
           type="button"
@@ -34,9 +51,9 @@ function Layout({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 w-64 flex flex-col gap-6 bg-[#0f172a] border-r border-white/5 px-4 py-6 transform transition-transform duration-200 md:static md:translate-x-0 md:flex z-40 ${
+        className={`fixed inset-y-0 left-0 w-64 flex flex-col gap-6 px-4 py-6 transform transition-transform duration-200 md:static md:translate-x-0 md:flex z-40 ${
           isNavOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        } ${theme === 'dark' ? 'bg-[#0f172a] border-r border-white/5 text-text-primary' : 'bg-white border-r border-gray-200 text-black'}`}
       >
         <div className="flex items-center gap-3">
           <img src={reactLogo} alt="Logo" className="h-10 w-10" />
@@ -66,7 +83,9 @@ function Layout({
       </aside>
 
       <div className="flex-1 flex flex-col">
-        <header className="h-16 border-b border-white/5 px-4 md:px-6 flex items-center justify-between bg-[#0f172a]">
+        <header
+          className={`h-16 border-b px-4 md:px-6 flex items-center justify-between ${theme === 'dark' ? 'border-white/5 bg-[#0f172a] text-text-primary' : 'border-gray-200 bg-white text-black'}`}
+        >
           <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
             <button
               type="button"
@@ -83,12 +102,23 @@ function Layout({
               <p className="font-semibold truncate">{headerSubtitle}</p>
             </div>
           </div>
-          <div className="text-sm text-text-muted hidden md:block flex-shrink-0">
-            Mock API & Query ready
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggleTheme}
+              className="rounded px-3 py-1 border border-text-muted bg-transparent text-text-muted hover:bg-white/10 dark:hover:bg-black/10 transition"
+              aria-label="Toggle dark/light mode"
+            >
+              {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
+            </button>
+            <span className="text-sm text-text-muted hidden md:block flex-shrink-0">
+              Mock API & Query ready
+            </span>
           </div>
         </header>
 
-        <main className="flex-1 overflow-auto bg-surface px-4 py-6 md:px-8 md:py-8">
+        <main
+          className={`flex-1 overflow-auto ${theme === 'dark' ? 'bg-surface' : 'bg-white'} px-4 py-6 md:px-8 md:py-8`}
+        >
           <div className="max-w-5xl mx-auto">
             <Outlet />
           </div>

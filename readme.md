@@ -6,14 +6,14 @@ A modern, full-stack admin dashboard built with React, TypeScript, and Vite. Fea
 
 - **Responsive Design** — Mobile-first layout with collapsible navigation
 - **User Management** — View and manage user accounts
-- **Assessment Tracking** — Create, view, and manage assessments with virtualized table
+- **Assessment Tracking** — Create, view, and manage assessments with paginated tables
 - **Dashboard Analytics** — Overview of key metrics and statistics
 - **Lazy-Loaded Routes** — Code splitting for optimal initial load performance
-- **Virtualized Lists** — Efficient rendering of large datasets using react-window
+- **Efficient Tables** — Paginated tables for assessments and users
 - **Mock API** — Built-in Express server for development
 - **React Query** — Efficient data fetching and caching
 - **Toast Notifications** — User-friendly feedback system
-- **Dark Theme** — Modern dark UI with Tailwind CSS
+- **Dark/Light Theme Toggle** — Switch between dark and light themes from the header; Tailwind configured for `class`-based dark mode
 
 ## 🛠️ Technologies Used
 
@@ -25,7 +25,7 @@ A modern, full-stack admin dashboard built with React, TypeScript, and Vite. Fea
 - **React Router** — Client-side routing with lazy-loaded components
 - **TanStack Query (React Query)** — Server state management
 - **Tailwind CSS** — Utility-first CSS framework
-- **react-window** — Virtualized list components for performance
+- **(note)** `react-window` was explored but removed from the assessments table due to `table`/`tbody` compatibility; the app uses paginated standard tables.
 
 ### Backend
 
@@ -100,7 +100,11 @@ A modern, full-stack admin dashboard built with React, TypeScript, and Vite. Fea
 
 ### Testing & Quality
 
-- `npm test` — Run Vitest in watch mode
+- `npm test` — Run Vitest once with verbose reporter (suitable for CI, equivalent to `npx vitest run --reporter verbose`)
+- `npm run test:watch` — Run Vitest in interactive watch mode (developer workflow)
+
+Vitest is configured to only include project tests — `src/**/*.test.{ts,tsx}` — and explicitly excludes `node_modules` and `e2e/`.
+
 - `npm run coverage` — Run tests with coverage report
 - `npm run lint` — Run ESLint on all files
 - `npm run typecheck` — Run TypeScript type checking
@@ -146,26 +150,16 @@ Routes are code-split using `React.lazy()` and `Suspense`:
 
 This reduces initial bundle size and improves Time to Interactive (TTI).
 
-### Virtualized Assessment Table
+### Assessments Table
 
-The Assessments page uses `react-window` for efficient list rendering:
+The Assessments page renders a paginated, sortable table with create/edit/delete flows and server-driven pagination. Note: `react-window` was explored for virtualization but removed after it proved incompatible with `<table>/<tbody>` semantics — pagination and standard rendering are used for compatibility and accessibility.
 
-- **Fixed-height container** (400px) with 60px rows
-- **Only visible items rendered** in the DOM
-- **Smooth scrolling** with minimal repaints
-- **Handles large datasets** efficiently
+Key behaviors:
 
-```tsx
-// Example from src/pages/Assessments.tsx
-<List
-  height={400}
-  itemCount={data.items.length}
-  itemSize={60}
-  width="100%"
-  rowComponent={...}
-  rowProps={{}}
-/>
-```
+- Sorting by column headers
+- Pagination controls for navigating pages
+- Modal form for create & edit actions (`AssessmentForm`)
+- Confirmation-driven deletes and toast notifications
 
 ### Code Splitting
 
@@ -224,6 +218,7 @@ npm test
 
 - Tests located in `src/` alongside components
 - Uses **Vitest** and **Testing Library**
+- Accessibility checks using **axe-core** (see `src/App.a11y.test.tsx`) — axe runs in the Vitest environment and the color-contrast rule is disabled by default to avoid jsdom false positives
 - Jest-DOM matchers in `src/setupTests.ts`
 - Watch mode enabled by default
 
@@ -241,7 +236,7 @@ Generates coverage reports in `coverage/` directory.
 npm run test:e2e
 ```
 
-Playwright tests located in `e2e/` directory.
+Playwright tests are located in the `e2e/` directory and include flows for Dashboard, Assessments (listing, create modal, error handling) and Users (listing and filters). The Playwright config includes a `webServer` entry so the dev server (`npm run dev`) is started automatically when running `npm run test:e2e` locally; you don't need to start the dev server manually. Use `npx playwright show-report` to open the last HTML report.
 
 ## 🔒 Git Hooks
 
@@ -298,7 +293,7 @@ vercel
 - TailwindCSS dark theme with custom color tokens
 - React Query client in `src/lib/queryClient.ts`
 - Lazy routes with loading UI in `src/main.tsx`
-- Virtualized lists with react-window
+- Paginated tables with standard rendering (react-window removed from `src/pages/Assessments.tsx` for compatibility)
 
 ## 🤝 Contributing
 

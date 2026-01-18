@@ -21,3 +21,32 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Light mode overrides: target elements when document root is NOT .dark */
+:root:not(.dark) {
+  color-scheme: light;
+}
+
+:root:not(.dark) .text-text-primary {
+  color: #0b1220 !important;
+}
+
+:root:not(.dark) .text-text-muted {
+  color: #6b7280 !important; /* slate-500 */
+}
+
+:root:not(.dark) .bg-surface {
+  background-color: #ffffff !important;
+}
+
+:root:not(.dark) .bg-panel {
+  background-color: #f8fafc !important;
+}
+
+:root:not(.dark) .border-border {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+:root:not(.dark) .text-brand-500 {
+  color: #16a34a !important; /* keep brand consistent in light mode */
+}
